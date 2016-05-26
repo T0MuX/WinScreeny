@@ -1,0 +1,25 @@
+### AT THE BEGINING OF THE SCRIPT, ADD THIS TO THE display VARIABLE
+Manufacturer
+### IT GIVES SOMETHING LIKE :
+display=( Host Cpu OS Arch Shell Manufacturer Motherboard HDD Memory Uptime Resolution DE WM WMTheme Font )
+
+
+### NEXT, IN THE DETECT SECTION, ADD THIS
+
+detectManufacturer () {
+    manufacturer=`wmic computersystem get manufacturer | tail -2 | tr -d '\r\n'`
+    [[ "$debug" -eq "1" ]] && Debug "Finding Manufacturer.... Found as: '$manufacturer'"
+}
+
+### AND MODIFY THIS
+
+detectMotherboard () {
+    board=`wmic computersystem get model | tail -2 | tr -d '\r\n'`
+    [[ "$debug" -eq "1" ]] && Debug "Finding Motherboard.... Found as: '$board'"
+    }
+
+
+
+### AND, AT THE END OF FILE IN THE OUTPUT SECTION PUT THIS WHERE YOU WANT :
+${f1}Manufacturer: ${f7}$manufacturer
+
